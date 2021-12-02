@@ -26,7 +26,10 @@ async function runWhaaat() {
   if (!flagExist) {
     console.log('add flag')
     console.log(input.join(' '))
+    return
   }
+
+  console.log(unnormalizedFlags)
 }
 
 export { runWhaaat }
