@@ -4,8 +4,9 @@ import meow from 'meow'
 const { log } = console
 
 async function runWhaaat() {
-  const cli = meow(help(), {
+  const { input, unnormalizedFlags, flags } = meow(help(), {
     importMeta: import.meta,
+    allowUnknownFlags: false,
     flags: {
       list: {
         type: 'boolean',
@@ -14,20 +15,18 @@ async function runWhaaat() {
     },
   })
 
-  console.log(Object.values(cli.unnormalizedFlags))
-  // const possibleWhaaat = process.argv.splice(2)
+  // if no flags run helper text
+  const flagExist = Object.values(unnormalizedFlags).includes(true)
 
-  // if (
-  //   !possibleWhaaat ||
-  //   possibleWhaaat.length < 2 ||
-  //   possibleWhaaat.includes('-')
-  // ) {
-  //   help()
-  // } else {
-  //   log(`Adding:`)
-  //   log(`${possibleWhaaat}`)
-  //   log(`To your WHAAATs`)
-  // }
+  if (!flagExist && !input.length) {
+    log(help())
+    return
+  }
+
+  if (!flagExist) {
+    console.log('add flag')
+    console.log(input.join(' '))
+  }
 }
 
 export { runWhaaat }
