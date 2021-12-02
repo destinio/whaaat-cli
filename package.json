@@ -1,0 +1,29 @@
+{
+  "name": "whaaat",
+  "version": "0.1.0",
+  "description": "A non-complex list app for things that make you go whaaat!!!",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/destinio/whaaat.git"
+  },
+  "keywords": [
+    "cli",
+    "list",
+    "todo",
+    "typescript"
+  ],
+  "files": [
+    "cli.js",
+    "dist/**/*"
+  ],
+  "author": "Destin Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/destinio/whaaat/issues"
+  },
+  "homepage": "https://destin.io"
+}
