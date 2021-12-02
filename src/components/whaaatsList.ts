@@ -12,12 +12,14 @@ async function WhaaatsList(howManyWhaaats: string) {
 
   const howManyWhaaatsNumber = Number(howManyWhaaats)
 
+  const organizedWhaaats = whaaats.sort((a, b) => b.dateCreated - a.dateCreated)
+
   if (!howManyWhaaatsNumber) {
-    whaaats.forEach(w => console.log(w.whaaat))
+    organizedWhaaats.forEach(w => console.log(w.whaaat, w.dateCreated))
     return
   }
 
-  whaaats.slice(0, howManyWhaaatsNumber).forEach(w => console.log(w.whaaat))
+  organizedWhaaats.slice(0, howManyWhaaatsNumber).forEach(w => console.log(w.whaaat))
 }
 
 export { WhaaatsList }

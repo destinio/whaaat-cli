@@ -13,7 +13,7 @@ async function addWhaaat(whaaat: string) {
   const newWhaaat: Whaaat = {
     whaaat,
     id: v4(),
-    dateCreated: new Date(),
+    dateCreated: Date.now(),
   }
 
   const newWhaaats = [...whaaatsJson, newWhaaat]
