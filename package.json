@@ -1,10 +1,12 @@
 {
   "name": "whaaat",
   "version": "0.1.0",
+  "type": "module",
   "description": "A non-complex list app for things that make you go whaaat!!!",
   "main": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ts:dev": "tsc --watch",
+    "ts:build": "rm -rf ./dist && tsc"
   },
   "repository": {
     "type": "git",
@@ -25,5 +27,13 @@
   "bugs": {
     "url": "https://github.com/destinio/whaaat/issues"
   },
-  "homepage": "https://destin.io"
+  "homepage": "https://destin.io",
+  "devDependencies": {
+    "@types/inquirer": "^8.1.3",
+    "@types/node": "^16.11.11",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
