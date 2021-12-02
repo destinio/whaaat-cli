@@ -1,9 +1,24 @@
-import { appendFileSync } from 'fs'
-import { EOL, homedir } from 'os'
+import { readFile, writeFile } from 'fs/promises'
+import { homedir } from 'os'
 import { resolve } from 'path'
+import { Whaaat } from './getWhaaats.js'
+import { v4 } from 'uuid'
 
-function addWhaaat(whaaat: string) {
-  console.log(whaaat)
+const WHAAATS_FILE = resolve(homedir(), './whaaat.json')
+
+async function addWhaaat(whaaat: string) {
+  const whaaatsRaw = await readFile(WHAAATS_FILE, 'utf-8')
+  const whaaatsJson = JSON.parse(whaaatsRaw)
+
+  const newWhaaat: Whaaat = {
+    whaaat,
+    id: v4(),
+    dateCreated: new Date(),
+  }
+
+  const newWhaaats = [...whaaatsJson, newWhaaat]
+
+  await writeFile(WHAAATS_FILE, JSON.stringify(newWhaaats))
 }
 
 export { addWhaaat }

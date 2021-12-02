@@ -4,8 +4,8 @@ import { resolve } from 'path'
 
 interface Whaaat {
   whaaat: string
-  id: number
-  dateCreated: string
+  id: string
+  dateCreated: Date
 }
 
 async function getWhaaats(): Promise<Whaaat[]> {

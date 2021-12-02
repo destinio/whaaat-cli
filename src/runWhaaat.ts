@@ -11,9 +11,9 @@ interface Meow {
 }
 
 async function runWhaaat() {
-  const { input, flags } = meow(help(), {
+  const { input: inputs, flags } = meow(help(), {
     importMeta: import.meta,
-    allowUnknownFlags: false,
+    // allowUnknownFlags: false,
     flags: {
       list: {
         type: 'boolean',
@@ -25,19 +25,18 @@ async function runWhaaat() {
   // if no flags run helper text
   const flagExist = Object.values(flags).includes(true)
 
-  if ((!flagExist && !input.length) || input.length > 1) {
+  if ((!flagExist && !inputs.length) || inputs.length > 1) {
     log(help())
     return
   }
 
   if (!flagExist) {
     console.log('adding whaaat')
-    addWhaaat(input.join(' '))
+    addWhaaat(inputs.join(' '))
     return
   }
 
-  console.log(input.length)
-  flagsHandler(flags)
+  flagsHandler(flags, inputs)
 }
 
 export { runWhaaat }

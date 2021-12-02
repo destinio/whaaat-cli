@@ -4,8 +4,8 @@ interface Flags {
   list: boolean
 }
 
-async function flagsHandler({ list }: Flags) {
-  list && (await WhaaatsList())
+async function flagsHandler(list: Flags, inputs: string[]) {
+  list && (await WhaaatsList(inputs[0]))
 }
 
 export { flagsHandler, Flags }
