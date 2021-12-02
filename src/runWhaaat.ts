@@ -25,7 +25,7 @@ async function runWhaaat() {
   // if no flags run helper text
   const flagExist = Object.values(flags).includes(true)
 
-  if (!flagExist && !input.length) {
+  if ((!flagExist && !input.length) || input.length > 1) {
     log(help())
     return
   }
@@ -36,6 +36,7 @@ async function runWhaaat() {
     return
   }
 
+  console.log(input.length)
   flagsHandler(flags)
 }
 

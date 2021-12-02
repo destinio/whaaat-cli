@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import { runWhaaat } from './runWhaaat.js'
 import { createWhaaatFile } from './createWhaaatFile.js'
 
-const WHAAAT_PATH = resolve(homedir(), './.whaaat')
+const WHAAAT_PATH = resolve(homedir(), './whaaat.json')
 
 async function app() {
   if (!existsSync(WHAAAT_PATH)) {

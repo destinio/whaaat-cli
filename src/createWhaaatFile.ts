@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 const HOME = os.homedir()
-const WHAAAT_PATH = path.resolve(HOME, './.whaaat')
+const WHAAAT_PATH = path.resolve(HOME, './whaaat.json')
 
 async function createWhaaatFile() {
   const { install } = await inquirer.prompt<{ install: boolean }>([
@@ -20,8 +20,9 @@ async function createWhaaatFile() {
     return
   }
 
-  console.log(`Creating .whaaat in ${HOME}`)
-  fs.writeFileSync(WHAAAT_PATH, '## WHAAAT DATA ##')
+  console.log(`Creating whaaat.json in ${HOME}.`)
+  console.log('This is where your whaaats are stored.')
+  fs.writeFileSync(WHAAAT_PATH, '[]')
 }
 
 export { createWhaaatFile }
