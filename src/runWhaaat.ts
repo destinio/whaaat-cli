@@ -13,7 +13,6 @@ interface Meow {
 async function runWhaaat() {
   const { input: inputs, flags } = meow(help(), {
     importMeta: import.meta,
-    // allowUnknownFlags: false,
     flags: {
       list: {
         type: 'boolean',
@@ -25,7 +24,7 @@ async function runWhaaat() {
   // if no flags run helper text
   const flagExist = Object.values(flags).includes(true)
 
-  if ((!flagExist && !inputs.length) || inputs.length > 1) {
+  if (!inputs.length && !flagExist) {
     log(help())
     return
   }

@@ -1,7 +1,8 @@
 import inquirer from 'inquirer'
 import os from 'os'
 import path from 'path'
-import fs from 'fs'
+import fs from 'fs-jetpack'
+import chalk from 'chalk'
 
 const HOME = os.homedir()
 const WHAAAT_PATH = path.resolve(HOME, './whaaat.json')
@@ -20,9 +21,10 @@ async function createWhaaatFile() {
     return
   }
 
-  console.log(`Creating whaaat.json in ${HOME}.`)
-  console.log('This is where your whaaats are stored.')
-  fs.writeFileSync(WHAAAT_PATH, '[]')
+  console.log(`Creating whaaat.json in ${chalk.bold.greenBright(HOME)}.`)
+  fs.writeAsync(WHAAAT_PATH, []).then(() =>
+    console.log(`${chalk.greenBright('DONE:')} Happy whaaating!`)
+  )
 }
 
 export { createWhaaatFile }

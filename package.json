@@ -1,9 +1,13 @@
 {
   "name": "whaaat",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "A non-complex list app for things that make you go whaaat!!!",
-  "main": "cli.js",
+  "main": "index.js",
+  "bin": {
+    "w": "index.js",
+    "whaaat": "index.js"
+  },
   "scripts": {
     "ts:dev": "tsc --watch",
     "ts:build": "rm -rf ./dist && tsc"
@@ -18,10 +22,6 @@
     "todo",
     "typescript"
   ],
-  "files": [
-    "cli.js",
-    "dist/**/*"
-  ],
   "author": "Destin Lee",
   "license": "MIT",
   "bugs": {
@@ -35,6 +35,8 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "chalk": "^5.0.0",
+    "fs-jetpack": "^4.3.0",
     "inquirer": "^8.2.0",
     "meow": "^10.1.2",
     "uuid": "^8.3.2"

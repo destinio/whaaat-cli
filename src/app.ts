@@ -1,16 +1,16 @@
+import fs from 'fs-jetpack'
+
 import { homedir } from 'os'
-import { existsSync } from 'fs'
 import { resolve } from 'path'
 import { runWhaaat } from './runWhaaat.js'
 import { createWhaaatFile } from './createWhaaatFile.js'
-import { readFile } from 'fs/promises'
 
 const WHAAAT_PATH = resolve(homedir(), './whaaat.json')
 
 async function app() {
-  const whaaatsRaw = await readFile(WHAAAT_PATH, 'utf-8')
+  const isWhaaatFile = await fs.existsAsync(WHAAAT_PATH)
 
-  if (!existsSync(WHAAAT_PATH) || !whaaatsRaw.length) {
+  if (!isWhaaatFile) {
     await createWhaaatFile()
   } else {
     await runWhaaat()
