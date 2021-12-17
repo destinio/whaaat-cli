@@ -32,7 +32,9 @@ async function WhaaatsListEdit() {
     })
     .then(async ({ selected }) => {
       if (selected.includes('cancel') || !selected.length) {
+        header()
         console.log('Canceled! Have a good one!')
+        return
       }
 
       header()

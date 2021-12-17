@@ -7,10 +7,10 @@ function help() {
   Usage:
     whaaat "What to add to WHAAATs"
 
-  Options:
-    --all, --list, -l    List all WHAAATs
-    --add, -a <string>   WHAAAT to add to WHAAATs 
-    --only <number>      Return spesific number of WHAAATs
+    Options:
+    --add, -a <string>    WHAAAT to add to WHAAATs
+    --list, -l     List all WHAAATs
+    --edit, -e            Edit/Delete WHAAATs
     
   Examples:
     whaaat "This is a WHAAAT"
@@ -18,6 +18,7 @@ function help() {
     whaaat --add "https://destin.io"
     whaaat -a https://destin.io
     whaaat --list
+    whaaat --edit
     `
 }
 

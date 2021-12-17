@@ -23,11 +23,17 @@ async function WhaaatsList(howManyWhaaats = '0') {
     .prompt<{ selected: string }>({
       name: 'selected',
       message: 'Select a Whaaat to copy to your clipboard!',
-      choices: whaaats.map(w => w.whaaat),
+      choices: ['cancel', ...whaaats.map(w => w.whaaat)],
+      default: 'cancel',
       type: 'list',
     })
     .then(async ({ selected }) => {
       header()
+      if (selected === 'cancel') {
+        console.log('Canceled. Have a good one!!')
+        return
+      }
+
       console.log(chalk.bold.magentaBright(selected))
       const spinner = ora()
       spinner.spinner = 'fingerDance'
