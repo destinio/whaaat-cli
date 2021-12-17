@@ -10,7 +10,7 @@ interface Meow {
   input: string[]
 }
 
-async function app() {
+;(async () => {
   const { input: inputs, flags } = meow(help(), {
     importMeta: import.meta,
     flags: {
@@ -39,6 +39,4 @@ async function app() {
   }
 
   flagsHandler(flags, inputs)
-}
-
-export { app }
+})()

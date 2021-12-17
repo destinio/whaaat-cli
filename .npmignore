@@ -1,0 +1,10 @@
+.vscode/
+src/
+.git*
+*.lock
+TODO.md
+scripts/
+public/
+tsconfig.json
+.prettierrc
+.editorconfig
