@@ -18,7 +18,7 @@ async function WhaaatsList(howManyWhaaats: string) {
 
   const organizedWhaaats = whaaats.sort((a, b) => b.dateCreated - a.dateCreated)
 
-  console.log(`${chalk.bold.magentaBright('Here are your whaaats:\n')}`)
+  console.log(`${chalk.bold.magentaBright.inverse('Here are your whaaats:')}`)
   if (!howManyWhaaatsNumber) {
     organizedWhaaats.forEach(w => console.log(` ${w.whaaat}`))
     return

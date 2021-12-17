@@ -18,6 +18,10 @@ async function runWhaaat() {
         type: 'boolean',
         alias: 'l',
       },
+      edit: {
+        type: 'boolean',
+        alias: 'e',
+      },
     },
   }) as Meow
 
