@@ -1,3 +1,4 @@
+declare module 'cfonts'
 interface Whaaat {
   whaaat: string
   id: string

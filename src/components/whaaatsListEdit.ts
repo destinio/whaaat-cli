@@ -1,12 +1,13 @@
 import inquirer from 'inquirer'
-import { clear } from '../utils/clear.js'
+import { header } from './header.js'
 import { getWhaaats, updateWhaaats } from '../useWhaaats.js'
 import chalk from 'chalk'
+import ora from 'ora'
 
 async function WhaaatsListEdit() {
   const whaaats = await getWhaaats()
 
-  clear()
+  header()
 
   if (!whaaats.length) {
     console.log('It appears you have no whats.\n"That\'s cool."')
@@ -34,15 +35,22 @@ async function WhaaatsListEdit() {
         console.log('Canceled! Have a good one!')
       }
 
+      header()
       const newData = [...whaaats].filter(w => !selected.includes(w.id))
-      clear()
 
-      console.log(
+      const spinner = ora()
+      spinner.spinner = 'fingerDance'
+      spinner.color = 'yellow'
+      spinner.start(
         `Deleting ${chalk.greenBright.bold(selected.length)} ${
-          selected.length > 1 ? 'links' : 'link'
+          selected.length > 1 ? 'whaaats' : 'whaaat'
         } `
       )
       await updateWhaaats(newData)
+
+      setTimeout(() => {
+        spinner.succeed('Done!')
+      }, 2000)
     })
 }
 

@@ -30,10 +30,10 @@ async function app() {
 
   if (!inputs.length && !flagExist) {
     WhaaatsList()
+    return
   }
 
   if (!flagExist) {
-    console.log('adding whaaat')
     addWhaaat(inputs.join(' '))
     return
   }

@@ -35,10 +35,13 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "cfonts": "^2.10.0",
     "chalk": "^5.0.0",
+    "clipboardy": "^3.0.0",
     "fs-jetpack": "^4.3.0",
     "inquirer": "^8.2.0",
     "meow": "^10.1.2",
+    "ora": "^6.0.1",
     "uuid": "^8.3.2"
   }
 }
