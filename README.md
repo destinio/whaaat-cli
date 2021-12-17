@@ -22,16 +22,40 @@ You can use **whaaat** or **w**
 The following example use **w**
 
 ```Bash
+w --help
 
-# ADD A WHAAAT
-w -a "This is a string whaaat"
+Usage:
+  whaaat "What to add to WHAAATs"
+
+  Options:
+  --add, -a <string>    WHAAAT to add to WHAAATs
+  --list, -l            List all WHAAATs
+  --edit, -e            Edit/Delete WHAAATs
+
+Examples:
+  whaaat "This is a WHAAAT"
+  whaaat "https://destin.io"
+  whaaat --add "https://destin.io"
+  whaaat -a https://destin.io
+  whaaat --list
+  whaaat --edit
+```
+
+```Bash
+
+# CREATE A WHAAAT
+w "This is a string whaaat"
 w This is a non quoted whaaat
 
 # LIST ALL WHAAATs
 w --list
+# OR run
+whaaat
+# OR
+w
 
-# LIST SOME WHAAATs
-w --only 5
+# Delete WHAAATs
+w --edit
 ```
 
 ### Example Output
