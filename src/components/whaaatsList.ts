@@ -1,10 +1,10 @@
 import chalk from 'chalk'
 
 import { log } from 'console'
-import { getWhaaats } from '../getWhaaats.js'
+import { getWhaaats } from '../useWhaaats.js'
 import { clear } from '../utils/clear.js'
 
-async function WhaaatsList(howManyWhaaats: string) {
+async function WhaaatsList(howManyWhaaats?: string) {
   const whaaats = await getWhaaats()
 
   if (!whaaats.length) {
@@ -14,17 +14,14 @@ async function WhaaatsList(howManyWhaaats: string) {
   }
 
   clear()
-  const howManyWhaaatsNumber = Number(howManyWhaaats)
-
-  const organizedWhaaats = whaaats.sort((a, b) => b.dateCreated - a.dateCreated)
 
   console.log(`${chalk.bold.magentaBright.inverse('Here are your whaaats:')}`)
-  if (!howManyWhaaatsNumber) {
-    organizedWhaaats.forEach(w => console.log(` ${w.whaaat}`))
+  if (!Number(howManyWhaaats)) {
+    whaaats.forEach(w => console.log(` ${w.whaaat}`))
     return
   }
 
-  organizedWhaaats.slice(0, howManyWhaaatsNumber).forEach(w => console.log(w.whaaat))
+  whaaats.slice(0, Number(howManyWhaaats)).forEach(w => console.log(w.whaaat))
 }
 
 export { WhaaatsList }

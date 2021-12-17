@@ -1,23 +1,17 @@
-import chalk from 'chalk'
-import fs from 'fs-jetpack'
-
-import { log } from 'console'
 import inquirer from 'inquirer'
-import { getWhaaats } from '../getWhaaats.js'
 import { clear } from '../utils/clear.js'
-import path from 'node:path'
-import { homedir } from 'os'
+import { getWhaaats, updateWhaaats } from '../useWhaaats.js'
+import chalk from 'chalk'
 
 async function WhaaatsListEdit() {
-  const whaaats = (await getWhaaats()).sort((a, b) => b.dateCreated - a.dateCreated)
-
-  if (!whaaats.length) {
-    log('It appears you have no whats.')
-    log("That's cool.")
-    return
-  }
+  const whaaats = await getWhaaats()
 
   clear()
+
+  if (!whaaats.length) {
+    console.log('It appears you have no whats.\n"That\'s cool."')
+    return
+  }
 
   inquirer
     .prompt<{ selected: string[] }>({
@@ -35,18 +29,20 @@ async function WhaaatsListEdit() {
         }),
       ],
     })
-    .then(({ selected }) => {
+    .then(async ({ selected }) => {
       if (selected.includes('cancel') || !selected.length) {
         console.log('Canceled! Have a good one!')
       }
 
-      console.log(selected)
-
       const newData = [...whaaats].filter(w => !selected.includes(w.id))
+      clear()
 
-      fs.writeAsync(path.resolve(homedir(), './whaaat.json'), newData).then(() =>
-        console.log(`${chalk.greenBright('DONE:')} Happy whaaating!`)
+      console.log(
+        `Deleting ${chalk.greenBright.bold(selected.length)} ${
+          selected.length > 1 ? 'links' : 'link'
+        } `
       )
+      await updateWhaaats(newData)
     })
 }
 

@@ -1,20 +1,44 @@
-import fs from 'fs-jetpack'
+import meow from 'meow'
 
-import { homedir } from 'os'
-import { resolve } from 'path'
-import { runWhaaat } from './runWhaaat.js'
-import { createWhaaatFile } from './createWhaaatFile.js'
+import { help } from './components/help.js'
+import { WhaaatsList } from './components/whaaatsList.js'
+import { flagsHandler } from './handlers/flagsHandler.js'
+import { addWhaaat } from './useWhaaats.js'
 
-const WHAAAT_PATH = resolve(homedir(), './whaaat.json')
+interface Meow {
+  flags: Flags
+  input: string[]
+}
 
 async function app() {
-  const isWhaaatFile = await fs.existsAsync(WHAAAT_PATH)
+  const { input: inputs, flags } = meow(help(), {
+    importMeta: import.meta,
+    flags: {
+      list: {
+        type: 'boolean',
+        alias: 'l',
+      },
+      edit: {
+        type: 'boolean',
+        alias: 'e',
+      },
+    },
+  }) as Meow
 
-  if (!isWhaaatFile) {
-    await createWhaaatFile()
-  } else {
-    await runWhaaat()
+  // if no flags run helper text
+  const flagExist = Object.values(flags).includes(true)
+
+  if (!inputs.length && !flagExist) {
+    WhaaatsList()
   }
+
+  if (!flagExist) {
+    console.log('adding whaaat')
+    addWhaaat(inputs.join(' '))
+    return
+  }
+
+  flagsHandler(flags, inputs)
 }
 
 export { app }
