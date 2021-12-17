@@ -9,7 +9,7 @@ import path from 'node:path'
 import { homedir } from 'os'
 
 async function WhaaatsListEdit() {
-  const whaaats = await getWhaaats()
+  const whaaats = (await getWhaaats()).sort((a, b) => b.dateCreated - a.dateCreated)
 
   if (!whaaats.length) {
     log('It appears you have no whats.')
@@ -18,8 +18,6 @@ async function WhaaatsListEdit() {
   }
 
   clear()
-
-  const organizedWhaaats = whaaats.sort((a, b) => b.dateCreated - a.dateCreated)
 
   inquirer
     .prompt<{ selected: string[] }>({
