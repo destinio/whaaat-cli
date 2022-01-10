@@ -5,12 +5,14 @@ import { header } from './header.js'
 import { say } from './message.js'
 import { spinner } from './spinner.js'
 
-async function WhaaatsList(howManyWhaaats = '0') {
+async function WhaaatsList(howManyWhaaats = 0) {
   // TODO: add pagination: howManyWhaaats = '5'
-  console.log(howManyWhaaats)
-  const whaaats = await getWhaaats()
+  const whaaats = !howManyWhaaats
+    ? await getWhaaats()
+    : (await getWhaaats()).slice(0, howManyWhaaats)
 
   header()
+  console.log(howManyWhaaats)
 
   if (!whaaats.length) {
     say('It appears you have no whats.')
@@ -23,8 +25,12 @@ async function WhaaatsList(howManyWhaaats = '0') {
     .prompt<{ selected: string }>({
       name: 'selected',
       message: 'Select a Whaaat to copy to your clipboard!',
-      choices: ['cancel', ...whaaats.map(w => w.whaaat)],
-      default: 'cancel',
+      choices: [
+        ...whaaats.map(w => w.whaaat),
+        new inquirer.Separator(),
+        'cancel',
+        new inquirer.Separator(),
+      ],
       type: 'list',
     })
     .then(async ({ selected }) => {

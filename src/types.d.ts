@@ -6,6 +6,6 @@ interface Whaaat {
 }
 
 interface Flags {
-  list: boolean
+  limit: number
   edit: boolean
 }

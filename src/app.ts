@@ -14,19 +14,20 @@ interface Meow {
   const { input: inputs, flags } = meow(help(), {
     importMeta: import.meta,
     flags: {
-      list: {
-        type: 'boolean',
+      limit: {
+        type: 'number',
         alias: 'l',
+        default: 0,
       },
       edit: {
         type: 'boolean',
         alias: 'e',
+        default: false,
       },
     },
   }) as Meow
 
-  // if no flags run helper text
-  const flagExist = Object.values(flags).includes(true)
+  const flagExist = Object.values(flags).includes(true) || flags.limit > 0
 
   if (!inputs.length && !flagExist) {
     WhaaatsList()

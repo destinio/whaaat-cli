@@ -9,15 +9,13 @@ function help() {
 
     Options:
     --add, -a <string>    WHAAAT to add to WHAAATs
-    --list, -l     List all WHAAATs
+    --limit, -l           Limit the number of WHAAATs to display
     --edit, -e            Edit/Delete WHAAATs
     
   Examples:
     whaaat "This is a WHAAAT"
     whaaat "https://destin.io"
-    whaaat --add "https://destin.io"
-    whaaat -a https://destin.io
-    whaaat --list
+    whaaat --limit 5
     whaaat --edit
     `
 }

@@ -6,7 +6,7 @@ async function spinner(message: string, callback: () => void) {
 
   spinner.spinner = 'fingerDance'
   spinner.color = 'yellow'
-  spinner.start(chalk.bold.cyanBright(message))
+  spinner.start(chalk.bold.magentaBright(message))
 
   callback && callback()
 
