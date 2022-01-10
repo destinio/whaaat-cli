@@ -8,8 +8,7 @@ function help() {
     whaaat "What to add to WHAAATs"
 
     Options:
-    --add, -a <string>    WHAAAT to add to WHAAATs
-    --limit, -l           Limit the number of WHAAATs to display
+    --limit, -l <number>  Limit the number of WHAAATs to display
     --edit, -e            Edit/Delete WHAAATs
     
   Examples:

@@ -28,8 +28,7 @@ Usage:
   whaaat "What to add to WHAAATs"
 
   Options:
-  --add, -a <string>    WHAAAT to add to WHAAATs
-  --list, -l            List all WHAAATs
+  --limit, -l <number>  Limit the number of WHAAATs to display
   --edit, -e            Edit/Delete WHAAATs
 
 Examples:
@@ -37,18 +36,18 @@ Examples:
   whaaat "https://destin.io"
   whaaat --add "https://destin.io"
   whaaat -a https://destin.io
-  whaaat --list
+  whaaat --limit 4
   whaaat --edit
 ```
 
 ```Bash
 
-# CREATE A WHAAAT
+# Create a whaaat
 w "This is a string whaaat"
 w This is a non quoted whaaat
 
-# LIST ALL WHAAATs
-w --list
+# List last 5 ssed whaaats
+w --limit 5
 # OR run
 whaaat
 # OR
