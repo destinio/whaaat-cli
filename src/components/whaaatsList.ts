@@ -1,21 +1,21 @@
-import chalk from 'chalk'
-import clipboard from 'clipboardy'
-import ora from 'ora'
-
-import { log } from 'console'
 import inquirer from 'inquirer'
 import { getWhaaats } from '../useWhaaats.js'
+import { copy } from '../utils/index.js'
 import { header } from './header.js'
+import { say } from './message.js'
+import { spinner } from './spinner.js'
 
 async function WhaaatsList(howManyWhaaats = '0') {
+  // TODO: add pagination: howManyWhaaats = '5'
   console.log(howManyWhaaats)
   const whaaats = await getWhaaats()
 
   header()
 
   if (!whaaats.length) {
-    log('It appears you have no whats.')
-    log("That's cool.")
+    say('It appears you have no whats.')
+    say("That's cool.")
+    // TODO: add a way to add a new whaaat if there are none
     return
   }
 
@@ -30,20 +30,13 @@ async function WhaaatsList(howManyWhaaats = '0') {
     .then(async ({ selected }) => {
       header()
       if (selected === 'cancel') {
-        console.log('Canceled. Have a good one!!')
+        say('Canceled. Have a good one!!')
         return
       }
 
-      console.log(chalk.bold.magentaBright(selected))
-      const spinner = ora()
-      spinner.spinner = 'fingerDance'
-      spinner.color = 'yellow'
-      spinner.start('Copying...')
-      await clipboard.write(selected)
+      say(selected)
 
-      setTimeout(() => {
-        spinner.succeed('Done!')
-      }, 2000)
+      spinner('Copying to clipboard...', async () => await copy(selected))
     })
 }
 

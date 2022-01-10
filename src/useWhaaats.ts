@@ -1,10 +1,8 @@
-import chalk from 'chalk'
 import fs from 'fs-jetpack'
-import ora from 'ora'
 import { homedir } from 'os'
 import path from 'path'
 import { v4 } from 'uuid'
-import { header } from './components/header.js'
+import { spinner } from './components/spinner.js'
 import { createWhaaatFile } from './createWhaaatFile.js'
 
 async function getWhaaats() {
@@ -32,15 +30,7 @@ async function addWhaaat(whaaat: string) {
 
   const newWhaaats = [newWhaaat, ...whaaats]
 
-  const spinner = ora()
-  spinner.spinner = 'fingerDance'
-  spinner.color = 'yellow'
-  spinner.start(chalk.bold.cyanBright('Adding Whaaat...'))
-  await updateWhaaats(newWhaaats)
-
-  setTimeout(() => {
-    spinner.succeed('Done!')
-  }, 2000)
+  spinner('Adding Whaaat...', async () => await updateWhaaats(newWhaaats))
 }
 
 export { getWhaaats, addWhaaat, updateWhaaats }
