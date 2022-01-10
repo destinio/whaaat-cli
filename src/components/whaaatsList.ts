@@ -6,13 +6,11 @@ import { say } from './message.js'
 import { spinner } from './spinner.js'
 
 async function WhaaatsList(howManyWhaaats = 0) {
-  // TODO: add pagination: howManyWhaaats = '5'
   const whaaats = !howManyWhaaats
     ? await getWhaaats()
     : (await getWhaaats()).slice(0, howManyWhaaats)
 
   header()
-  console.log(howManyWhaaats)
 
   if (!whaaats.length) {
     say('It appears you have no whats.')
