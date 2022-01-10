@@ -15,39 +15,41 @@ async function WhaaatsListEdit() {
     return
   }
 
-  inquirer
-    .prompt<{ selected: string[] }>({
-      name: 'selected',
-      message: 'Which whaaats would you like to delete?',
-      type: 'checkbox',
-      default: 'cancel',
-      choices: [
-        { name: 'cancel', value: 'cancel' },
-        ...whaaats.map(w => {
-          return {
-            name: w.whaaat,
-            value: w.id,
-          }
-        }),
-      ],
-    })
-    .then(async ({ selected }) => {
-      if (selected.includes('cancel') || !selected.length) {
-        header()
-        say('Canceled! Have a good one!')
-        return
-      }
+  const { selected } = await inquirer.prompt<{ selected: string[] }>({
+    name: 'selected',
+    message: 'Which whaaats would you like to delete?',
+    type: 'checkbox',
+    default: 'cancel',
+    choices: [
+      ...whaaats.map(w => {
+        return {
+          name: w.whaaat,
+          value: w.id,
+        }
+      }),
+      new inquirer.Separator(),
+      'cancel',
+      new inquirer.Separator(),
+    ],
+  })
 
-      header()
-      const newData = [...whaaats].filter(w => !selected.includes(w.id))
+  header()
 
-      spinner(
-        `Deleting ${chalk.greenBright.bold(selected.length)} ${
-          selected.length > 1 ? 'whaaats' : 'whaaat'
-        } `,
-        async () => await updateWhaaats(newData)
-      )
-    })
+  if (selected.includes('cancel') || !selected.length) {
+    header()
+    say('Canceled! Have a good one!')
+    return
+  }
+
+  const newData = [...whaaats].filter(w => !selected.includes(w.id))
+
+  say(
+    `Deleting ${chalk.greenBright.bold(selected.length)} ${
+      selected.length > 1 ? 'whaaats' : 'whaaat'
+    } `
+  )
+
+  spinner(`Deleting...`, async () => await updateWhaaats(newData))
 }
 
 export { WhaaatsListEdit }

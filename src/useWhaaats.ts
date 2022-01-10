@@ -24,7 +24,7 @@ async function updateWhaaats(newWhaaats: Whaaat[]) {
 async function updateLastUsed(id: string) {
   const whaaats = await getWhaaats()
 
-  const newWhaaats: Whaaat[] = whaaats.map(whaaat => {
+  const newWhaaats = whaaats.map(whaaat => {
     if (whaaat.id === id) {
       return {
         ...whaaat,

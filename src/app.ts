@@ -39,5 +39,5 @@ interface Meow {
     return
   }
 
-  flagsHandler(flags, inputs)
+  flagsHandler(flags)
 })()

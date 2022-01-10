@@ -1,3 +1,4 @@
+import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { getWhaaats, updateLastUsed } from '../useWhaaats.js'
 import { copy } from '../utils/index.js'
@@ -14,8 +15,7 @@ async function WhaaatsList(howManyWhaaats = 0) {
 
   if (!whaaats.length) {
     say('It appears you have no whats.')
-    say("That's cool.")
-    // TODO: add a way to add a new whaaat if there are none
+    say('Use: "whaaat "This is a what" to start whaaating.')
     return
   }
 
@@ -36,20 +36,16 @@ async function WhaaatsList(howManyWhaaats = 0) {
 
   header()
 
-  if (selected === 'cancel') {
+  if (typeof selected === 'string') {
     say('Canceled. Have a good one!!')
     return
   }
 
-  if (typeof selected !== 'object') {
-    say('Inputs are not supported yet')
-    return
-  }
-
   say(selected.whaaat)
+  await updateLastUsed(selected.id)
+
   spinner('Copying to clipboard...', async () => {
     await copy(selected.whaaat)
-    await updateLastUsed(selected.id)
   })
 }
 
