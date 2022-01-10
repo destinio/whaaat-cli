@@ -7,17 +7,34 @@ import { createWhaaatFile } from './createWhaaatFile.js'
 
 async function getWhaaats() {
   const data: Whaaat[] = await fs.readAsync(path.resolve(homedir(), './whaaat.json'), 'json')
+
   if (!data) {
     createWhaaatFile()
       .then(async () => await getWhaaats())
       .catch(err => console.log(err))
   }
 
-  return data
+  return data.sort((a, b) => b.lastUpdated - a.lastUpdated)
 }
 
 async function updateWhaaats(newWhaaats: Whaaat[]) {
   fs.writeAsync(path.resolve(homedir(), './whaaat.json'), newWhaaats)
+}
+
+async function updateLastUsed(id: string) {
+  const whaaats = await getWhaaats()
+
+  const newWhaaats: Whaaat[] = whaaats.map(whaaat => {
+    if (whaaat.id === id) {
+      return {
+        ...whaaat,
+        lastUpdated: Date.now(),
+      }
+    }
+    return whaaat
+  })
+
+  await updateWhaaats(newWhaaats)
 }
 
 async function addWhaaat(whaaat: string) {
@@ -26,6 +43,7 @@ async function addWhaaat(whaaat: string) {
     whaaat,
     id: v4(),
     dateCreated: Date.now(),
+    lastUpdated: Date.now(),
   }
 
   const newWhaaats = [newWhaaat, ...whaaats]
@@ -33,4 +51,4 @@ async function addWhaaat(whaaat: string) {
   spinner('Adding Whaaat...', async () => await updateWhaaats(newWhaaats))
 }
 
-export { getWhaaats, addWhaaat, updateWhaaats }
+export { getWhaaats, addWhaaat, updateWhaaats, updateLastUsed }

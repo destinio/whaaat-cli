@@ -2,7 +2,6 @@ import inquirer from 'inquirer'
 import { header } from './header.js'
 import { getWhaaats, updateWhaaats } from '../useWhaaats.js'
 import chalk from 'chalk'
-import ora from 'ora'
 import { say } from './message.js'
 import { spinner } from './spinner.js'
 

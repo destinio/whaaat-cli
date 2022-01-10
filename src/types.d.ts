@@ -3,6 +3,7 @@ interface Whaaat {
   whaaat: string
   id: string
   dateCreated: number
+  lastUpdated: number
 }
 
 interface Flags {
