@@ -28,16 +28,14 @@ Usage:
   whaaat "What to add to WHAAATs"
 
   Options:
-  --limit, -l <number>  Limit the number of WHAAATs to display
   --edit, -e            Edit/Delete WHAAATs
+  --limit, -l <number>  Limit the number of WHAAATs to display
 
 Examples:
   whaaat "This is a WHAAAT"
   whaaat "https://destin.io"
-  whaaat --add "https://destin.io"
-  whaaat -a https://destin.io
-  whaaat --limit 4
   whaaat --edit
+  whaaat --limit 4
 ```
 
 ```Bash
@@ -46,23 +44,14 @@ Examples:
 w "This is a string whaaat"
 w This is a non quoted whaaat
 
-# List last 5 ssed whaaats
-w --limit 5
 # OR run
 whaaat
 # OR
 w
 
+# List last 5 ssed whaaats
+w --limit 5
+
 # Delete WHAAATs
 w --edit
-```
-
-### Example Output
-
-```
-Here are your whaaats:
-
- blah blah blah
- test me
- This is a test what
 ```
